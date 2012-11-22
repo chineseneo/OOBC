@@ -1,25 +1,38 @@
 public class PriceCalculator {
-    public Double getPrice(int distance) {
-        double basicPrice = 6.0;
-        double additionalPrice = 0.0;
 
-        double extraPrice = (distance - 2) * 1.5;
-        if (distance == 3){
-            additionalPrice = extraPrice;
-        }
-        else if (distance == 4) {
-            additionalPrice = extraPrice;
+    private double extraPriceRatio = 0.5;
+    private double unitPrice = 1.5;
+    private double basicPrice = 6.0;
+    private double unitTimePrice = 0.5;
 
-        }
-        else if (distance == 9) {
-            additionalPrice = 11.25;
+    private int baseExtraDistance = 8;
+    private int baseDistance = 2;
 
-        }
-        else if (distance == 8) {
-            additionalPrice = extraPrice;
+    public Double getPrice(double distance, double waitTime) {
+        return basicPrice + extraPrice(distance) + moreExtraPrice(distance) + unitTimePrice * waitTime;
+    }
 
-        }
+    public Double getPrice(double distance) {
+        return basicPrice + extraPrice(distance) + moreExtraPrice(distance);
+    }
 
-        return basicPrice + additionalPrice;
+    private double moreExtraPrice(double distance) {
+        if (distance <= baseExtraDistance)
+            return 0.0;
+        return (distance - baseExtraDistance) * extraUnitPrice();
+    }
+
+    private double extraPrice(double distance) {
+        if (distance <= baseDistance)
+            return 0.0;
+        return (distance - baseDistance) * unitPrice;
+    }
+
+    private double extraUnitPrice() {
+        return unitPrice * extraPriceRatio;
+    }
+
+    public long getPayment(double price) {
+        return Math.round(price);
     }
 }

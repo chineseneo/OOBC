@@ -7,18 +7,15 @@ public class PriceCalculatorTest {
     @Test
     public void shouldPriceBe6WhenDistanceIs2()
     {
-        int distance = 2;
         PriceCalculator priceCalculator = new PriceCalculator();
-
-        double expectedPrice = 6;
-
-        assertThat(priceCalculator.getPrice(distance), is(expectedPrice));
+        assertThat(priceCalculator.getPrice(2), is(6.0));
     }
 
-//    @Test
-//    public void shouldPriceBe6WhenDistanceIs1(){
-//        int
-//    }
+    @Test
+    public void shouldPriceBe6WhenDistanceIs1(){
+        PriceCalculator priceCalculator = new PriceCalculator();
+        assertThat(priceCalculator.getPrice(1.5), is(6.0));
+    }
 
     @Test
     public void shouldPriceBe7Point5WhenDistanceIs3(){
@@ -46,6 +43,30 @@ public class PriceCalculatorTest {
     {
         PriceCalculator priceCalculator = new PriceCalculator();
         assertThat(priceCalculator.getPrice(8), is(15.0));
+    }
+
+    @Test
+    public void shouldPriceBe15dot5WhenDistanceIs8AndWaitTimeIs1Minute(){
+        PriceCalculator priceCalculator = new PriceCalculator();
+        assertThat(priceCalculator.getPrice(8, 1), is(15.5));
+    }
+
+    @Test
+    public void shouldPriceBe16WhenDistanceIs8AndWaitTimeIs2Minute(){
+        PriceCalculator priceCalculator = new PriceCalculator();
+        assertThat(priceCalculator.getPrice(8, 2), is(16.0));
+    }
+
+    @Test
+    public void shouldPaymentBe16WhenPriceIs15Dot5(){
+        PriceCalculator priceCalculator = new PriceCalculator();
+        assertThat(priceCalculator.getPayment(15.5), is(16L));
+    }
+
+    @Test
+    public void shouldPaymentBe15WhenPriceIs15Dot4(){
+        PriceCalculator priceCalculator = new PriceCalculator();
+        assertThat(priceCalculator.getPayment(15.4), is(15L));
     }
 
 }
