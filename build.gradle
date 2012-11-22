@@ -8,3 +8,7 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.10'
 }
+
+task hello << {
+    println "hello!"
+}

@@ -9,10 +9,14 @@ public class PriceCalculator {
     private int baseDistance = 2;
 
     public Double getPrice(double distance, double waitTime) {
+        if (distance <= 0)
+            return 0.0;
         return basicPrice + extraPrice(distance) + moreExtraPrice(distance) + unitTimePrice * waitTime;
     }
 
     public Double getPrice(double distance) {
+        if (distance <= 0)
+            return 0.0;
         return basicPrice + extraPrice(distance) + moreExtraPrice(distance);
     }
 
@@ -32,7 +36,9 @@ public class PriceCalculator {
         return unitPrice * extraPriceRatio;
     }
 
+
     public long getPayment(double price) {
         return Math.round(price);
     }
+
 }

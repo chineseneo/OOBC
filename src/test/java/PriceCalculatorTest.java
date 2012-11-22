@@ -69,4 +69,9 @@ public class PriceCalculatorTest {
         assertThat(priceCalculator.getPayment(15.4), is(15L));
     }
 
+    @Test
+    public void shouldPriceBe0WhenDistanceIs0() throws Exception {
+        PriceCalculator priceCalculator = new PriceCalculator();
+        assertThat(priceCalculator.getPrice(0), is(0.0));
+    }
 }
